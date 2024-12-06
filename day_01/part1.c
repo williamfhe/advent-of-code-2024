@@ -1,73 +1,11 @@
+#include "helper.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-#define MAX_LINE_LENGTH 1024
 // #define INPUT_FILE_PATH "./res/demo_input.txt"
 #define INPUT_FILE_PATH "./res/puzzle_input.txt"
-
-char **read_all_lines(const char *filename, int *line_count)
-{
-    FILE *file = fopen(filename, "r");
-    if (file == NULL)
-    {
-        perror("Failed to open file");
-        return NULL;
-    }
-
-    char **lines = NULL;
-    char buffer[MAX_LINE_LENGTH];
-    *line_count = 0;
-
-    while (fgets(buffer, MAX_LINE_LENGTH, file))
-    {
-        // Remove newline character if present
-        size_t len = strlen(buffer);
-        if (len > 0 && buffer[len - 1] == '\n')
-        {
-            buffer[len - 1] = '\0';
-        }
-
-        // Reallocate memory for the lines array
-        char **temp = realloc(lines, (*line_count + 1) * sizeof(char *));
-        if (temp == NULL)
-        {
-            perror("Memory allocation failed");
-            free(lines);
-            fclose(file);
-            return NULL;
-        }
-        lines = temp;
-
-        // Allocate memory for the new line and copy it
-        lines[*line_count] = malloc((strlen(buffer) + 1) * sizeof(char));
-        if (lines[*line_count] == NULL)
-        {
-            perror("Memory allocation failed");
-            for (int i = 0; i < *line_count; i++)
-            {
-                free(lines[i]);
-            }
-            free(lines);
-            fclose(file);
-            return NULL;
-        }
-        strcpy(lines[*line_count], buffer);
-        (*line_count)++;
-    }
-
-    fclose(file);
-    return lines;
-}
-
-void free_read_lines(char **lines, const int line_count)
-{
-    for (int i = 0; i < line_count; i++)
-    {
-        free(lines[i]);
-    }
-    free(lines);
-}
 
 void dummy_bubblesort(int *numbers, int length)
 {

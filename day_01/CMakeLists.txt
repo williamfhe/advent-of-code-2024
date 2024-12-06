@@ -17,11 +17,11 @@ add_custom_target(create_build_dir ALL
 )
 
 # Add the Part 1 target
-add_executable(part1 part1.c)
+add_executable(part1 part1.c helper.c)
 add_dependencies(part1 create_build_dir)
 
 # Add the Part 2 target
-add_executable(part2 part2.c)
+add_executable(part2 part2.c helper.c)
 add_dependencies(part2 create_build_dir)
 
 # Custom target to build and run Part 1

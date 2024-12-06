@@ -70,4 +70,4 @@ build/
 part1
 part2
 
-.vscode/
+.vscode/settings.json
